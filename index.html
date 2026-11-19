@@ -1,0 +1,260 @@
+ <!DOCTYPE html>
+ <html lang="pt-br">
+ <head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>MN Uniformes | Escolar e Profissional</title>
+    <meta name="description" content="Uniformes escolares e profissionais com qualidade e entrega para todo o Brasil.">
+    <link rel="stylesheet" href="mn.css">
+ </head>
+ <body>
+    <div class="topbar">Frete grátis acima de R$ 299,00 • pague com Pix e ganhe 5% de desconto </div>
+  <header class="header">
+    <div class="container header__inner">
+      <button class="icon-btn menu-btn" id="menuBtn" aria-label="Abrir menu">☰</button>
+
+      <a href="#inicio" class="brand" aria-label="MN Uniformes">
+        <span class="brand__seal">MN</span>
+        <span class="brand__text">
+          <strong>UNIFORMES</strong>
+          <small>— Escolar e Profissional —</small>
+        </span>
+      </a>
+
+      <nav class="nav" id="nav">
+        <a href="#inicio">Início</a>
+        <a href="#produtos" data-filter="todos">Produtos</a>
+        <a href="#produtos" data-filter="escolar">Escolar</a>
+        <a href="#produtos" data-filter="profissional">Profissional</a>
+        <a href="#contato">Contato</a>
+      </nav>
+
+      <button class="icon-btn cart-btn" id="cartBtn" aria-label="Abrir carrinho">
+        🛒 <span class="cart-count" id="cartCount">0</span>
+      </button>
+    </div>
+  </header>
+
+
+  <section class="hero" id="inicio">
+    <div class="container hero__inner">
+      <div class="hero__text">
+        <p class="eyebrow">Coleção 2027</p>
+        <h1>Uniformes que vestem <span>qualidade</span></h1>
+        <p>Escolar e profissional: conforto, durabilidade e acabamento de verdade. Personalize com o nome da sua escola ou empresa.</p>
+        <a href="#produtos" class="btn btn--gold">Ver produtos</a>
+      </div>
+      <div class="hero__art" id="heroArt" aria-hidden="true"></div>
+    </div>
+  </section>
+
+  <section class="perks container">
+    <div><span>🚚</span><b>Entrega no Brasil</b><small>Calcule pelo CEP</small></div>
+    <div><span>💳</span><b>Até 6x sem juros</b><small>No cartão de crédito</small></div>
+    <div><span>⚡</span><b>5% off no Pix</b><small>Aprovação imediata</small></div>
+    <div><span>🧵</span><b>Bordado personalizado</b><small>Sob consulta</small></div>
+  </section>
+
+  <section class="shop container" id="produtos">
+    <div class="shop__head">
+      <h2>Nossos produtos</h2>
+      <div class="shop__tools">
+        <input type="search" id="search" placeholder="Buscar produto..." aria-label="Buscar produto">
+        <select id="sort" aria-label="Ordenar">
+          <option value="rel">Relevância</option>
+          <option value="menor">Menor preço</option>
+          <option value="maior">Maior preço</option>
+          <option value="nome">Nome (A–Z)</option>
+        </select>
+      </div>
+    </div>
+
+    <div class="chips" id="chips">
+      <button class="chip is-active" data-filter="todos">Todos</button>
+      <button class="chip" data-filter="escolar">Escolar</button>
+      <button class="chip" data-filter="profissional">Profissional</button>
+    </div>
+
+    <div class="grid" id="grid"></div>
+    <p class="empty" id="empty" hidden>Nenhum produto encontrado.</p>
+  </section>
+
+  <footer class="footer" id="contato">
+    <div class="container footer__inner">
+      <div>
+        <div class="brand brand--footer">
+          <span class="brand__seal">MN</span>
+          <span class="brand__text"><strong>UNIFORMES</strong><small>— Escolar e Profissional —</small></span>
+        </div>
+        <p>Vestindo escolas, empresas e profissionais com qualidade.</p>
+      </div>
+      <div>
+        <h4>Atendimento</h4>
+        <p>WhatsApp: (00) 00000-0000</p>
+        <p>contato@mnuniformes.com.br</p>
+        <p>Seg a Sex, 8h às 18h</p>
+      </div>
+      <div>
+        <h4>Pagamento</h4>
+        <p>Pix • Cartão de crédito e débito</p>
+        <p>Compra segura</p>
+      </div>
+    </div>
+    <p class="footer__copy">© <span id="year"></span> MN Uniformes. Todos os direitos reservados.</p>
+  </footer>
+
+  <!-- Modal de produto -->
+  <div class="overlay" id="productOverlay" hidden>
+    <div class="modal" role="dialog" aria-modal="true" aria-labelledby="pTitle">
+      <button class="modal__close" data-close aria-label="Fechar">×</button>
+      <div class="pdetail">
+        <div class="pdetail__img" id="pImg"></div>
+        <div class="pdetail__info">
+          <p class="tag" id="pCat"></p>
+          <h3 id="pTitle"></h3>
+          <p class="pdetail__desc" id="pDesc"></p>
+          <p class="price" id="pPrice"></p>
+          <p class="muted" id="pParcel"></p>
+
+          <label class="field-label">Tamanho</label>
+          <div class="options" id="pSizes"></div>
+
+          <label class="field-label">Cor</label>
+          <div class="options" id="pColors"></div>
+
+          <label class="field-label">Quantidade</label>
+          <div class="qty">
+            <button id="pMinus" aria-label="Diminuir">−</button>
+            <span id="pQty">1</span>
+            <button id="pPlus" aria-label="Aumentar">+</button>
+          </div>
+
+          <button class="btn btn--navy btn--block" id="pAdd">Adicionar ao carrinho</button>
+          <p class="form-error" id="pError"></p>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Carrinho -->
+  <div class="overlay overlay--side" id="cartOverlay" hidden>
+    <aside class="drawer" role="dialog" aria-modal="true" aria-labelledby="cartTitle">
+      <div class="drawer__head">
+        <h3 id="cartTitle">Seu carrinho</h3>
+        <button class="modal__close modal__close--static" data-close aria-label="Fechar">×</button>
+      </div>
+      <div class="drawer__body" id="cartItems"></div>
+
+      <div class="drawer__foot" id="cartFoot">
+        <div class="cep">
+          <label for="cepInput" class="field-label">Calcular frete</label>
+          <div class="cep__row">
+            <input id="cepInput" inputmode="numeric" maxlength="9" placeholder="00000-000" autocomplete="postal-code">
+            <button class="btn btn--gold" id="cepBtn">Calcular</button>
+          </div>
+          <div id="cepResult" class="cep__result"></div>
+        </div>
+
+        <div class="totals">
+          <div><span>Subtotal</span><b id="tSub">R$ 0,00</b></div>
+          <div><span>Frete</span><b id="tShip">—</b></div>
+          <div class="totals__pix"><span>No Pix (5% off)</span><b id="tPix">R$ 0,00</b></div>
+          <div class="totals__total"><span>Total</span><b id="tTotal">R$ 0,00</b></div>
+        </div>
+        <button class="btn btn--navy btn--block" id="checkoutBtn">Finalizar compra</button>
+        <button class="link-btn" id="clearBtn">Esvaziar carrinho</button>
+      </div>
+    </aside>
+  </div>
+
+  <!-- Checkout -->
+  <div class="overlay" id="checkoutOverlay" hidden>
+    <div class="modal modal--wide" role="dialog" aria-modal="true" aria-labelledby="coTitle">
+      <button class="modal__close" data-close aria-label="Fechar">×</button>
+      <h3 id="coTitle">Finalizar compra</h3>
+
+      <form id="checkoutForm" novalidate>
+        <div class="co">
+          <div class="co__main">
+            <fieldset>
+              <legend>1. Seus dados</legend>
+              <div class="row">
+                <label>Nome completo<input name="nome" required autocomplete="name"></label>
+                <label>E-mail<input name="email" type="email" required autocomplete="email"></label>
+              </div>
+              <div class="row">
+                <label>Telefone / WhatsApp<input name="tel" inputmode="tel" required autocomplete="tel"></label>
+                <label>CPF<input name="cpf" inputmode="numeric" maxlength="14" required></label>
+              </div>
+            </fieldset>
+
+            <fieldset>
+              <legend>2. Entrega</legend>
+              <div class="row">
+                <label>CEP<input name="cep" id="coCep" inputmode="numeric" maxlength="9" required autocomplete="postal-code"></label>
+                <label>Número<input name="numero" required></label>
+              </div>
+              <label>Endereço<input name="rua" id="coRua" required autocomplete="address-line1"></label>
+              <div class="row">
+                <label>Bairro<input name="bairro" id="coBairro" required></label>
+                <label>Complemento<input name="comp"></label>
+              </div>
+              <div class="row">
+                <label>Cidade<input name="cidade" id="coCidade" required></label>
+                <label>UF<input name="uf" id="coUf" maxlength="2" required></label>
+              </div>
+              <div class="ship-options" id="coShip"></div>
+            </fieldset>
+
+            <fieldset>
+              <legend>3. Pagamento</legend>
+              <div class="tabs" role="tablist">
+                <button type="button" class="tab is-active" data-pay="pix">Pix <small>-5%</small></button>
+                <button type="button" class="tab" data-pay="credito">Cartão de crédito</button>
+                <button type="button" class="tab" data-pay="debito">Cartão de débito</button>
+              </div>
+
+              <div class="pay-panel" id="payPix">
+                <p class="muted">Ao confirmar, geramos o código Pix (copia e cola) e o QR Code para pagamento imediato.</p>
+              </div>
+
+              <div class="pay-panel" id="payCard" hidden>
+                <label>Número do cartão<input name="cardNum" id="cardNum" inputmode="numeric" maxlength="19" placeholder="0000 0000 0000 0000" autocomplete="cc-number"></label>
+                <label>Nome impresso no cartão<input name="cardName" id="cardName" autocomplete="cc-name"></label>
+                <div class="row">
+                  <label>Validade<input name="cardExp" id="cardExp" inputmode="numeric" maxlength="5" placeholder="MM/AA" autocomplete="cc-exp"></label>
+                  <label>CVV<input name="cardCvv" id="cardCvv" inputmode="numeric" maxlength="4" placeholder="123" autocomplete="cc-csc"></label>
+                </div>
+                <label id="installWrap">Parcelas<select name="parcelas" id="installments"></select></label>
+              </div>
+            </fieldset>
+
+            <p class="form-error" id="coError"></p>
+          </div>
+
+          <aside class="co__summary">
+            <h4>Resumo do pedido</h4>
+            <div id="coItems"></div>
+            <div class="totals">
+              <div><span>Subtotal</span><b id="coSub"></b></div>
+              <div><span>Frete</span><b id="coShipVal"></b></div>
+              <div id="coDiscRow"><span>Desconto Pix</span><b id="coDisc"></b></div>
+              <div class="totals__total"><span>Total</span><b id="coTotal"></b></div>
+            </div>
+            <button type="submit" class="btn btn--gold btn--block" id="coSubmit">Confirmar pedido</button>
+            <p class="muted small">Ambiente de demonstração: nenhum pagamento real é processado.</p>
+          </aside>
+        </div>
+      </form>
+
+      <!-- Resultado -->
+      <div class="result" id="result" hidden></div>
+    </div>
+  </div>
+
+  <div class="toast" id="toast" role="status" aria-live="polite"></div>
+
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/qrcodejs/1.0.0/qrcode.min.js"></script>
+  <script src="script.js"></script>
+ </body>
+ </html>  
